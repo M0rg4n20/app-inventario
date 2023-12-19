@@ -1,0 +1,40 @@
+[21-Aug-2023 21:13:50 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:13:50 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:00 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:00 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:31 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:31 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:39 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:39 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:41 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:41 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:51 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:14:51 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:16:40 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:16:40 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:17:12 America/Mexico_City] PHP Warning:  require(/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/avaluo10/app-inventario-mx/public/index.php on line 34
+[21-Aug-2023 21:17:12 America/Mexico_City] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/avaluo10/app-inventario-mx/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home1/avaluo10/app-inventario-mx/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home1/avaluo10/app-inventario-mx/public/index.php on line 34

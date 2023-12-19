@@ -1,0 +1,6 @@
+images/productos/*
+!/images/productos/temp_producto.png
+images/usuarios/*
+!/images/usuarios/user.png
+
+!/images/logo-example.png
