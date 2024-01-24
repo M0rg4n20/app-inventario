@@ -30,7 +30,7 @@ class EnvioController extends Controller
 
   public function index()
   {
-
+    $hoy = Carbon::today();
     /*$pedidos = Envio::with('venta.detalles_ventas.producto', 'venta.cliente', 'responsable','ruta','repartidor')
         ->whereNotNull('repartidor_id')
         //->where('created_at', '>=', $this->ini_dia)
@@ -66,9 +66,43 @@ class EnvioController extends Controller
       //->whereNot('estado', 'Entregado')
       ->orderBy('orden')
       ->get();
-    //return $pedidos;
+
+      $pedidosNow = Envio::with(['venta' => function ($query) {
+        $query->select('id', 'user_id', 'cliente_id')->with(['detalles_ventas' => function ($query) {
+          $query->select('id', 'producto_id', 'venta_id', 'cantidad')->with(['producto' => function ($query) {
+            $query->select('id', 'nombre', 'codigo_barra');
+          }]);
+        }])->with(['cliente' => function ($query) {
+          $query->select('id', 'nombre');
+        }]);
+      }])->select(
+        'id',
+        'venta_id',
+        'ruta_id',
+        'repartidor_id',
+        'comentario',
+        'estado',
+        'fecha',
+        'hora',
+        'orden',
+        'telefono',
+        'colonia',
+        'direccion'
+      )->with(['ruta' => function ($query) {
+        $query->select('id', 'nombre', 'colonias');
+      }])
+        ->with(['repartidor' => function ($query) {
+          $query->select('id', 'name');
+        }])->whereNotNull('repartidor_id')
+        ->whereDate('fecha', '=', $hoy)
+        //->whereNot('estado', 'Entregado')
+        ->orderBy('orden')
+        ->get();
+
+    //return $pedidosNow;
     return Inertia::render('Envio/Index', [
-      'pedidos' => $pedidos
+      'pedidos' => $pedidos,
+      'pedidosNow'=>$pedidosNow
 
     ]);
   }

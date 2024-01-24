@@ -18,6 +18,7 @@ const form = useForm({
   repartidor_id: '',
   responsable_id: '',
   colonia: '',
+  cantidad_rutas:''
 })
 
 const titulo = "Colonia"
@@ -43,18 +44,20 @@ const addCliente = () => {
 };
 
 const dataEdit = (id) => {
-  axios.get(route(ruta + '.asignar', id))
+
+  axios.get(route(ruta + '.asignarindividual', id))
     .then(res => {
       isShowModal.value = true;
       var datos = res.data
       rutas.value = datos.rutas
       repartidores.value = datos.repartidores;
-
+      console.log(datos.repartidores);
       form.id = datos.envio.id;
       form.responsable_id = user.id;
       form.colonia = datos.envio.colonia;
 
       const rutaAsignada = datos.rutas.find((ruta) => ruta.label === datos.envio.colonia);
+
       if (rutaAsignada) {
         form.ruta_id = rutaAsignada.value;
       }
@@ -66,23 +69,38 @@ const closeModal = () => {
   form.reset();
 };
 
+const repartidorRowSelection = (id) => {  
+  form.cantidad_rutas = id; 
+};
+
 //envio de formulario
 const submit = () => {
   form.clearErrors()
-  form.post(route(ruta + '.update', form.id), {
-    preserveScroll: true,
-    forceFormData: true,
-    onSuccess: () => {
-      isShowModal.value = false
-      ok(titulo + ' Asignada')
-      router.get(route(ruta + '.index'));
-      form.reset()
-    },
-    onFinish: () => {
-    },
-    onError: () => {
+
+  if (form.cantidad_rutas>=3)
+    {
+      Swal.fire({
+      icon: 'warning',
+      title: 'Este repartidor ya tiene 3 o mas rutas asignadas, debe seleccionar otro.',
+      width: 350,
+    })
+    }else
+    {
+      form.post(route(ruta + '.update', form.id), {
+        preserveScroll: true,
+        forceFormData: true,
+        onSuccess: () => {
+          isShowModal.value = false
+          ok(titulo + ' Asignada')
+          router.get(route(ruta + '.index'));
+          form.reset()
+        },
+        onFinish: () => {
+        },
+        onError: () => {
+        }
+      });
     }
-  });
 };
 
 const ok = (mensaje) => {
@@ -100,6 +118,7 @@ const ok = (mensaje) => {
     <button type="button"
       class="rounded bg-green-500 px-1 py-1 text-xs font-normal text-white mr-1 mb-1 hover:bg-green-700"
       @click="addCliente">Asignar</button>
+      
     <Modal :show="isShowModal" @close="closeModal" maxWidth="md">
       <div class="p-2">
 
@@ -120,7 +139,8 @@ const ok = (mensaje) => {
               <div class="grid grid-cols-3 gap-4">
                 <div v-for="(repartidor, index) in repartidores" :key="index" class="flex items-center space-x-2">
                   <input type="radio" :id="'repartidor_' + repartidor.value" v-model="form.repartidor_id"
-                    :value="repartidor.value" />
+                    :value="repartidor.value" 
+                    @change="repartidorRowSelection(repartidor.cantidad_rutas)"/>
                   <label :for="'repartidor_' + repartidor.value">{{ repartidor.label }}</label>
                 </div>
               </div>

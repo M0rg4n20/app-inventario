@@ -42,6 +42,7 @@ class ClienteController extends Controller
 
   public function store(ClientStoreRequest $request)
   {
+    //return $request;
     $faker = Faker\Factory::create();
     $request->merge([
       //"email"=> $faker->unique()->email,

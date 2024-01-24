@@ -23,6 +23,7 @@ class Pago extends Model
         'user_id',
         'metodo_pago_id',
         'created_at',
+        'api'
     ];
 
     public function user()

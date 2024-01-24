@@ -11,6 +11,8 @@ import TextInput from '@/Components/TextInput.vue';
 
 const tabla_categorias = ref({})
 const searchTerm = ref('');
+const searchRuta = ref('');
+const searchRepartidor = ref('');
 const mostrarLista = ref(false);
 
 const { lista_fechas } = usePage().props;
@@ -51,12 +53,67 @@ const selectCountry = (country, vis, event) => {
 //buscador
 const filteredItems = computed(() => {
   let filteredItems1 = usePage().props.cortecaja;
-  if (searchTerm.value !== "") {
+
+  console.log(searchTerm.value );
+  console.log(searchRuta.value );
+  console.log(searchRepartidor.value );
+
+  if (searchTerm.value !== "" && searchRuta.value =="" && searchRepartidor.value=="") {
+    console.log('Filtro solo por fecha');
     pagination.currentPage = 1;
     filteredItems1 = tabla_categorias.value.filter(bet => {
-      return bet.fecha.toLowerCase().includes(searchTerm.value.toLowerCase())
+      return bet.fecha.toLowerCase().includes(searchTerm.value.toLowerCase()) 
     })
   }
+
+  if (searchTerm.value == "" && searchRuta.value !=="" && searchRepartidor.value=="") {
+    console.log('Filtro solo por ruta');
+    pagination.currentPage = 1;
+    filteredItems1 = tabla_categorias.value.filter(bet => {
+      return bet.codigo_ruta.toLowerCase().includes(searchRuta.value.toLowerCase()) 
+    })
+  }
+
+  if (searchTerm.value == "" && searchRuta.value =="" && searchRepartidor.value!=="") {
+    console.log('Filtro solo por repartidor');
+    pagination.currentPage = 1;
+    filteredItems1 = tabla_categorias.value.filter(bet => {
+      return bet.repartidor.toLowerCase().includes(searchRepartidor.value.toLowerCase()) 
+    })
+  }
+
+  if (searchTerm.value !== "" && searchRuta.value !=="" && searchRepartidor.value=="") {
+    console.log('Filtro solo por fecha y ruta');
+    pagination.currentPage = 1;
+    filteredItems1 = tabla_categorias.value.filter(bet => {
+      return bet.fecha.toLowerCase().includes(searchTerm.value.toLowerCase()) && bet.codigo_ruta.toLowerCase().includes(searchRuta.value.toLowerCase()) 
+    })
+  }
+
+  if (searchTerm.value !== "" && searchRuta.value =="" && searchRepartidor.value!=="") {
+    console.log('Filtro solo por fecha y repartidor');
+    pagination.currentPage = 1;
+    filteredItems1 = tabla_categorias.value.filter(bet => {
+      return bet.fecha.toLowerCase().includes(searchTerm.value.toLowerCase()) && bet.repartidor.toLowerCase().includes(searchRepartidor.value.toLowerCase()) 
+    })
+  }
+
+  if (searchTerm.value == "" && searchRuta.value !=="" && searchRepartidor.value!=="") {
+    console.log('Filtro solo por repartidor y ruta');
+    pagination.currentPage = 1;
+    filteredItems1 = tabla_categorias.value.filter(bet => {
+      return bet.codigo_ruta.toLowerCase().includes(searchRuta.value.toLowerCase()) && bet.repartidor.toLowerCase().includes(searchRepartidor.value.toLowerCase()) 
+    })
+  }
+
+  if (searchTerm.value !== "" && searchRuta.value !=="" && searchRepartidor.value!=="") {
+    console.log('Filtro solo por fecha, repartidor y ruta');
+    pagination.currentPage = 1;
+    filteredItems1 = tabla_categorias.value.filter(bet => {
+      return bet.fecha.toLowerCase().includes(searchTerm.value.toLowerCase()) && bet.codigo_ruta.toLowerCase().includes(searchRuta.value.toLowerCase()) && bet.repartidor.toLowerCase().includes(searchRepartidor.value.toLowerCase()) 
+    })
+  }
+
   return filteredItems1;
 
 })
@@ -143,29 +200,14 @@ onMounted(() => {
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Caja - Total del corte
               de: {{ searchTerm }}</h1>
           </div>
-          <div class="grid grid-cols-1 p-4 xl:grid-cols-12 md:grid-span-12 xl:gap-4 dark:bg-gray-900 z-20">
 
+          <div class="grid grid-cols-1 p-4 xl:grid-cols-12 md:grid-span-12 xl:gap-4 dark:bg-gray-900 z-20">
+            
             <div class="p-2 col-span-3">
               <InputLabel for="search" value="Desglose general"
                 class="block text-base font-bold leading-6 mb-0 text-gray-900 dark:text-white" />
-              <div class="mt-1">
-                <TextInput id="search" type="text" v-model="searchTerm" autocomplete="search"
-                  class="block w-full text-gray-900 border border-gray-300 rounded bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Ingrese la fecha" />
-
-
-                <ul v-show="mostrarLista"
-                  class="rounded bg-white border border-gray-300 px-1 py-1 space-y-1 absolute z-10">
-                  <li v-for="country in searchCountries" :key="country.name"
-                    @click="(event) => selectCountry(country.name, false, event)"
-                    class="cursor-pointer hover:bg-gray-100 p-1">
-                    {{ country.name }}
-                  </li>
-                </ul>
-              </div>
-
-
             </div>
+
             <div class="p-2 col-span-3">
               <div class="w-full">
                 <h3 class="text-base font-bold text-gray-900 dark:text-white">Total venta </h3>
@@ -192,10 +234,46 @@ onMounted(() => {
             </div>
           </div>
 
+          <div class="grid grid-cols-1 p-4 xl:grid-cols-12 md:grid-span-12 xl:gap-4 dark:bg-gray-900 z-20">
+            <div class="p-2 col-span-3">              
+              <div class="mt-1">
+                <TextInput id="search" type="text" v-model="searchTerm" autocomplete="search"
+                  class="block w-full text-gray-900 border border-gray-300 rounded bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Ingrese la fecha" />
+
+
+                <ul v-show="mostrarLista"
+                  class="rounded bg-white border border-gray-300 px-1 py-1 space-y-1 absolute z-10">
+                  <li v-for="country in searchCountries" :key="country.name"
+                    @click="(event) => selectCountry(country.name, false, event)"
+                    class="cursor-pointer hover:bg-gray-100 p-1">
+                    {{ country.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="p-2 col-span-3">             
+              <div class="mt-1">
+                <TextInput id="searchRuta" type="text" v-model="searchRuta" autocomplete="search"
+                  class="block w-full text-gray-900 border border-gray-300 rounded bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Ingrese la ruta" />
+              </div>
+            </div>
+
+            <div class="p-2 col-span-3">             
+              <div class="mt-1">
+                <TextInput id="searchRepartidor" type="text" v-model="searchRepartidor" autocomplete="search"
+                  class="block w-full text-gray-900 border border-gray-300 rounded bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Ingrese el repartidor" />
+              </div>
+          </div>
+
+          </div>            
+          
 
           <div class="inline-block min-w-full align-middle">
             <div class="overflow-visible">
-
 
               <table class="w-full text-sm text-left text-gray-600 dark:text-gray-400">
                 <thead
@@ -241,14 +319,18 @@ onMounted(() => {
                     <th scope="col" class="p-1 text-center border-2 border-gray-300 dark:border-gray-500">
                       Fecha
                     </th>
-
-
+                    <th scope="col" class="p-1 text-center border-2 border-gray-300 dark:border-gray-500">
+                      Código Ruta
+                    </th>
+                    <th scope="col" class="p-1 text-center border-2 border-gray-300 dark:border-gray-500">
+                      Repartidor
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <tr :key="id"
-                    v-for="{ id, codigo, vendedor, neto, monto_efectivo, forma_entrega, descuento, monto_tarjeta, saldo, total, metodo_pago, metodo_pago_id, tipo_pago, fecha }, index in paginatedItems"
+                    v-for="{ id, codigo, vendedor, neto, monto_efectivo, forma_entrega, descuento, monto_tarjeta, saldo, total, metodo_pago, metodo_pago_id, tipo_pago, fecha, codigo_ruta , repartidor}, index in paginatedItems"
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
 
                     <td scope="row"
@@ -303,7 +385,15 @@ onMounted(() => {
                       {{ fecha }}
                     </td>
 
-
+                    <td scope="row"
+                      class="px-3 py-1 border-2 text-end border-gray-300 dark:border-gray-700 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ codigo_ruta }}
+                    </td>
+                    <td scope="row"
+                      class="px-3 py-1 border-2 text-end border-gray-300 dark:border-gray-700 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ repartidor }}
+                    </td>
+                    
                   </tr>
 
                 </tbody>

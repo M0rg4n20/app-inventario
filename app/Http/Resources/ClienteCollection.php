@@ -32,6 +32,9 @@ class ClienteCollection extends ResourceCollection
                     //'fecha_nacimiento'=>Carbon::createFromFormat('YYYY-mm-dd', $row->fecha_nacimiento)->format('d/m/Y'),
                     'fecha_nacimiento'=>Carbon::parse($row->fecha_nacimiento)->format('d/m/Y'),
                     'created_at'=>$row->created_at->format('d/m/Y H:m:s'),
+                    /* 'lat' => $row->lat??'',
+                    'lng' => $row->lng??'',
+                    'place_id' => $row->place_id??'', */
                 ];
             }),
             'links' => [

@@ -16,6 +16,7 @@ class Ruta extends Model
         'id',
         'nombre',
         'colonias',
+        'repartidor_id'
     ];
 
     public function envios()

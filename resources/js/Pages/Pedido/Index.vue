@@ -17,6 +17,7 @@ import language from 'datatables.net-plugins/i18n/es-ES.mjs';
 DataTable.use(DataTablesCore);
 import moment from 'moment';
 import Sortable from 'sortablejs';
+import AsignarRepartidorMultiple from './Partials/AsignarRepartidorMultiple.vue';
 
 const datos = ref([]);
 const tabla1 = ref(null);
@@ -105,6 +106,7 @@ const ok = (mensaje) => {
 
 const selectedOrders = ref([]);
 const selectedRows = ref([]);
+
 const selectAllRows = (event) => {
   const isChecked = event.target.checked;
   if (isChecked) {
@@ -139,11 +141,46 @@ const toggleRowSelection = (id) => {
           </BreadcrumbItem>
         </Breadcrumb>
       </div>
-      <div class=" px-5 col-span-full flex justify-between items-center">
-        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ titulo }}</h1>
+
+       
+    <!--     
+      <div id="contenedor">
+          <div>
+            <AsignarMultiplesPedidos v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
+            </AsignarMultiplesPedidos>
+          </div>
+          <div>
+            <AsignarRepartidorMultiple v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
+            </AsignarRepartidorMultiple>
+          </div>
+        </div> -->
+
         
-        <AsignarMultiplesPedidos v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
-        </AsignarMultiplesPedidos>
+
+      <div class="px-5 col-span-full flex justify-between items-center">
+        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ titulo }}</h1>
+        <div class="content">
+          <div class="green">
+            <AsignarMultiplesPedidos v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
+            </AsignarMultiplesPedidos>
+          </div>
+          <div class="green">
+            <AsignarRepartidorMultiple v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
+            </AsignarRepartidorMultiple>
+          </div>
+        </div>
+<!-- 
+        <div id="contenedor">       
+           
+          <div id="asgcolonia">
+            <AsignarMultiplesPedidos v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
+          </AsignarMultiplesPedidos>
+          </div>
+          <div id="asgrepartidor">
+            <AsignarRepartidorMultiple v-show="permissions.includes('asignar-repartidor')" :selectedOrders="selectedOrders">
+          </AsignarRepartidorMultiple>
+          </div>
+        </div> -->
         <!-- <CrearModal v-show="permissions.includes('asignar-ruta')"></CrearModal> -->
       </div>
       <div

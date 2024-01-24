@@ -207,8 +207,14 @@ Route::controller(SolicitarRetiroController::class)->group(function () {
 Route::controller(PedidoController::class)->group(function () {
     Route::get('/pedidos', 'index')->name('pedidos.index')->middleware('auth');
     Route::get('/pedidos/asignar/{id?}', 'asignar')->name('pedidos.asignar')->middleware('auth');
+    Route::get('/pedidos/asignarrm', 'asignarrm')->name('pedidos.asignarrm')->middleware('auth');     
+    Route::get('/pedidos/asignarindividual/{id?}', 'asignarindividual')->name('pedidos.asignarindividual')->middleware('auth');
+     
     Route::post('/pedidos/update/{id}', 'update')->name('pedidos.update')->middleware('auth');
     Route::post('/pedidos/updateMultiple', 'updateMultiple')->name('pedidos.update-multiple')->middleware('auth');
+    Route::post('/pedidos/updateMultipleRepartidor', 'updateMultipleRepartidor')->name('pedidos.update-multipleRepartidor')->middleware('auth');
+
+    
     Route::post('/pedidos/updatepedido/{id}', 'updatePedido')->name('pedidos.updatepedido')->middleware('auth');
     Route::get('/pedidos/{id}', 'show')->name('pedidos.show')->middleware('auth');
 

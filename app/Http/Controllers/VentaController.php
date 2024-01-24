@@ -209,6 +209,7 @@ class VentaController extends Controller
         'venta_id' => $venta->id,
         'user_id' => $venta->user_id,
         'metodo_pago_id' => $request->metodo_pago_id ==0 ? null : $request->metodo_pago_id ,
+        'api' => 0,
       ]);
       //creando detalle venta
       foreach ($request->productos as $producto) {
@@ -269,7 +270,7 @@ class VentaController extends Controller
         event(new PedidoEvent($envio));
 
         /** Creando ruta con nombre de colonia */
-        $hoy = Carbon::now()->format('Y-m-d');
+      /*   $hoy = Carbon::now()->format('Y-m-d');
         $colonia = $dato_cliente->casa_colonia;
 
         $rutaExistente = Ruta::where('nombre', $colonia)
@@ -281,7 +282,7 @@ class VentaController extends Controller
             'nombre' => $colonia,
             'colonias' => $colonia,
           ]);
-        }
+        } */
         /** Fin crear ruta */
       }
       DB::commit();

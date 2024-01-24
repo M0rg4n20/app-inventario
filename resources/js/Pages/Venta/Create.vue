@@ -263,13 +263,13 @@ const submit = () => {
   }
 
 
-  if (form.metodo_pago_id == 1) {
+/*   if (form.metodo_pago_id == 1) {
     if (form.monto_efectivo == 0 || form.monto_efectivo == '') {
       alerta('Debe ingresar el monto en efectivo', 'warning');
       return false;
     }
   }
-
+ */
   if (form.metodo_pago_id == 2) {
     if (form.monto_tarjeta == 0 || form.monto_tarjeta == '' || parseFloat(form.saldo) < 0) {
       alerta('Debe ingresar el monto en tarjeta correcto', 'warning');
@@ -303,10 +303,10 @@ const submit = () => {
     alerta('El monto ingresado es distinto al monto total', 'warning');
     return false;
   }
-  if ((form.hora) == '' && form.forma_entrega === "DOMICILIO" && form.comentario =='') {
+ /*  if ((form.hora) == '' && form.forma_entrega === "DOMICILIO" && form.comentario =='') {
     alerta('Debe indicar la hora y comentario.', 'warning');
     return false;
-  }
+  } */
 
 
   form.clearErrors()

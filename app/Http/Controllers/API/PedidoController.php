@@ -94,6 +94,14 @@ class PedidoController extends BaseController
         "telefono" => $value->telefono,
         "efectivo" => ($havePagos) ? ($value->venta->pagos[0]->monto_efectivo) : 0,
         "tarjeta" => ($havePagos) ? ($value->venta->pagos[0]->monto_tarjeta) : 0,
+
+        "lat_casa" => $value->venta->cliente->lat_casa ?? '',
+        "lng_casa" => $value->venta->cliente->lng_casa ?? '',
+        "place_id_casa" => $value->venta->cliente->place_id_casa ?? '',
+        
+        "lat_oficina" => $value->venta->cliente->lat_oficina ?? '',
+        "lng_oficina" => $value->venta->cliente->lng_oficina ?? '',
+        "place_id_oficina" => $value->venta->cliente->place_id_oficina ?? '',
       ]);
       $productos = [];
     }
@@ -181,6 +189,7 @@ class PedidoController extends BaseController
       $venta->saldo = $venta->saldo  - $credito - $debito - $transferencia - $efectivo;
       $venta->save();
 
+
       Pago::create([
         'monto_efectivo' => $efectivo,
         'monto_tarjeta' => $credito + $debito + $transferencia,
@@ -188,10 +197,11 @@ class PedidoController extends BaseController
         'num_tarjeta' => $request->numero_tarjeta,
         'metodo_pago' => $metodosPago[$metodoPago],
         'tipo_pago' => 'ABONO',
+        'api' => '1',
         'forma_entrega' => 'DOMICILIO',
         'venta_id' => $pedido->venta_id,
         'user_id' => $pedido->repartidor_id,
-        'metodo_pago_id' => $metodoPago,
+        'metodo_pago_id' => $metodoPago,      
       ]);   
 
       return response()->json(['success' => true]);

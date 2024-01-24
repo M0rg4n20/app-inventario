@@ -152,6 +152,15 @@ class RutaController extends Controller
             ->distinct()
             ->get();
 
+           // return  $lista_colonias;
+           /*
+            $lista_colonias = DB::table('envios as ve')
+            ->select(DB::raw("distinct ve.colonia"))
+            ->where('ve.created_at', '>=', $this->ini_dia)
+            ->where('ve.created_at', '<=', $this->fin_dia)
+            ->distinct()
+            ->get();*/
+
         $lista_rutas = DB::table('rutas as ru')
             ->select(DB::raw("ru.colonias, ru.created_at"))
             ->where('ru.created_at', '>=', $this->ini_dia)

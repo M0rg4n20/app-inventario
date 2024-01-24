@@ -70,3 +70,31 @@
     width: 100%;
     border: 1px solid;
   }
+
+  .content
+   {
+    color: black;
+    height: 80px;
+    width: 600px;
+    text-align: right;
+  }
+  
+  .content div{
+    height: 50%;
+    width: 200px;
+    align-content:flex-end;
+  } 
+  
+  /* Flexbox Styles */
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+/*   .content1 {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .content2 {
+    display: flex;
+    flex-wrap: wrap-reverse;
+  } */

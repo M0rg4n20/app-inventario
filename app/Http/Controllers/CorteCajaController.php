@@ -44,6 +44,7 @@ class CorteCajaController extends Controller
    //   ->where('pa.user_id', '=', $user_id->id)
    ->where('ve.forma_entrega', '=', 'DOMICILIO')
    ->where('pa.tipo_pago', '=', 'ABONO')
+   ->where('pa.api', '=', 1)
       ->get();
     }
 
@@ -67,7 +68,10 @@ class CorteCajaController extends Controller
     $datos = DB::table('pagos as pa')
       ->join('ventas as ve', 've.id', '=', 'pa.venta_id')
       ->join('users as us', 'us.id', '=', 'pa.user_id')
-      ->select(DB::raw("pa.id, ve.codigo,us.name AS vendedor,ve.neto,ve.descuento,pa.saldo,ve.total,pa.metodo_pago,pa.metodo_pago_id,pa.monto_efectivo,pa.monto_tarjeta,pa.tipo_pago,pa.forma_entrega,
+      ->leftJoin('envios as e', 've.id', '=', 'e.venta_id')
+      ->leftJoin('rutas as r', 'r.id', '=', 'e.ruta_id')
+      ->leftJoin('users as re', 're.id', '=', 'e.repartidor_id')
+      ->select(DB::raw("IFNULL(r.codigo_ruta,'Sin ruta') as codigo_ruta, IFNULL(re.name,'Sin repartidor') as repartidor, pa.id, ve.codigo,us.name AS vendedor,ve.neto,ve.descuento,pa.saldo,ve.total,pa.metodo_pago,pa.metodo_pago_id,pa.monto_efectivo,pa.monto_tarjeta,pa.tipo_pago,pa.forma_entrega,
          DATE_FORMAT(pa.created_at ,'%d/%m/%Y %H:%i:%s') AS fecha" )
         )
       ->orderBy('fecha', 'desc')
@@ -75,7 +79,7 @@ class CorteCajaController extends Controller
     //  ->where('ve.forma_entrega', '=', 'INMEDIATA')
       ->get();
     }
-//return    $datos;
+  //return    $datos;
     return Inertia::render('CorteCaja/Index', [
       'cortecaja' => $datos,
       'hoy' => $hoy,
@@ -87,7 +91,9 @@ class CorteCajaController extends Controller
     $datos = DB::table('pagos as pa')
       ->join('ventas as ve', 've.id', '=', 'pa.venta_id')
       ->join('users as us', 'us.id', '=', 'pa.user_id')
-      ->select(DB::raw("pa.id, ve.codigo,us.name AS vendedor,ve.neto,ve.descuento,pa.saldo,ve.total,pa.metodo_pago,pa.metodo_pago_id,pa.monto_efectivo,pa.monto_tarjeta,pa.tipo_pago,pa.forma_entrega,
+      ->leftJoin('envio as e', 've.id', '=', 'e.venta_id')
+      ->leftJoin('rutas as r', 'r.id', '=', 'e.ruta_id')
+      ->select(DB::raw(" IFNULL(r.codigo_ruta,'Sin ruta') as codigo_ruta, pa.id, ve.codigo,us.name AS vendedor,ve.neto,ve.descuento,pa.saldo,ve.total,pa.metodo_pago,pa.metodo_pago_id,pa.monto_efectivo,pa.monto_tarjeta,pa.tipo_pago,pa.forma_entrega,
          DATE_FORMAT(pa.created_at ,'%d/%m/%Y %H:%i:%s') AS fecha" )
         )
       ->orderBy('fecha', 'desc')
@@ -96,11 +102,13 @@ class CorteCajaController extends Controller
       ->get();
 
 //return    $datos;
+
+
     return Inertia::render('CorteCaja/Index', [
       'cortecaja' => $datos,
       'hoy' => $hoy,
       'lista_fechas' => $nuevo
-    ]);
+    ]); 
   }
 }
 

@@ -27,11 +27,17 @@ watch(casa_colonia, () => {
     return form.casa_colonia=casa_colonia.value
 })
 const setOficinaColonia = (e) => {
-    of_colonia.value=e.name
+    of_colonia.value=e.name;
+    form.lng_oficina =e.geometry.location.lng();
+    form.lat_oficina =e.geometry.location.lat();
+    form.place_id_oficina =e.place_id;  
 }
 
-const setCasaColonia = (e) => {
-    casa_colonia.value=e.name
+const setCasaColonia = (e) => {      
+    casa_colonia.value=e.name;
+    form.lng_casa =e.geometry.location.lng();
+    form.lat_casa =e.geometry.location.lat();
+    form.place_id_casa =e.place_id;  
 }
 const selectNac = (modelData) => {
     form.fecha_nacimiento = modelData;
@@ -62,7 +68,12 @@ const form = useForm({
     oficina_colonia: '',
     fecha_nacimiento: '',
     tipo_cliente: '',
-
+    lat_casa:'',
+    lng_casa:'',
+    place_id_casa:'',
+    lat_oficina:'',
+    lng_oficina:'',
+    place_id_oficina:'',
 })
 
 const perfiles = ref({
@@ -131,6 +142,15 @@ const ok = (mensaje) => {
                 </div>
                 <form @submit.prevent="submit">
                     <div class="px-2 grid grid-cols-6 gap-4 md:gap-3 2xl:gap-6 mb-2">
+
+                        <TextInput id="lng_casa" type="hidden" v-model="form.lng_casa"/> 
+                        <TextInput id="lat_casa" type="hidden" v-model="form.lat_casa"/> 
+                        <TextInput id="place_id_casa" type="hidden" v-model="form.place_id_casa"/> 
+
+                        
+                        <TextInput id="lng_oficina" type="hidden" v-model="form.lng_oficina"/> 
+                        <TextInput id="lat_oficina" type="hidden" v-model="form.lat_oficina"/> 
+                        <TextInput id="place_id_oficina" type="hidden" v-model="form.place_id_oficina"/> 
 
                         <div class="col-span-6 shadow-default xl:col-span-3">
                             <InputLabel for="nombre" value="Nombre"

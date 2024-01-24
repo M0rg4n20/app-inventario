@@ -21,6 +21,12 @@ class Cliente extends Model
         'oficina_direccion',
         'oficina_colonia',
         'fecha_nacimiento',
+        'lat_casa',
+        'lng_casa',
+        'place_id_casa',
+        'lat_oficina',
+        'lng_oficina',
+        'place_id_oficina',
     ];
 
     protected $casts = [
