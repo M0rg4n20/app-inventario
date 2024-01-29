@@ -95,13 +95,13 @@ class PedidoController extends BaseController
         "efectivo" => ($havePagos) ? ($value->venta->pagos[0]->monto_efectivo) : 0,
         "tarjeta" => ($havePagos) ? ($value->venta->pagos[0]->monto_tarjeta) : 0,
 
-        "lat_casa" => $value->venta->cliente->lat_casa ?? '',
-        "lng_casa" => $value->venta->cliente->lng_casa ?? '',
-        "place_id_casa" => $value->venta->cliente->place_id_casa ?? '',
+        "lat" => $value->venta->cliente->lat_casa ?? '',
+        "lng" => $value->venta->cliente->lng_casa ?? '',
+        "place_id" => $value->venta->cliente->place_id_casa ?? '',
         
-        "lat_oficina" => $value->venta->cliente->lat_oficina ?? '',
+      /*   "lat_oficina" => $value->venta->cliente->lat_oficina ?? '',
         "lng_oficina" => $value->venta->cliente->lng_oficina ?? '',
-        "place_id_oficina" => $value->venta->cliente->place_id_oficina ?? '',
+        "place_id_oficina" => $value->venta->cliente->place_id_oficina ?? '', */
       ]);
       $productos = [];
     }
